@@ -42,8 +42,74 @@ namespace NewL.Data.Concrete.EntityFramework.Mappings
             builder.HasOne<Category>(p => p.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategorId);
             builder.HasOne<User>(p => p.User).WithMany(u => u.Products).HasForeignKey(p => p.UserId);
             builder.ToTable("Products");
+            builder.HasData(
 
-
+            new Product
+            {
+                Id = 1,
+                CategorId = 1,
+                Name = "TV",
+                Content = "Birçok TV markaları mevcuttur.",
+                Thumnail = "Default.jpg",
+                SeoDescription = "TV",
+                SeoName = "YazHan",
+                SeoTags = "Vestel,Samsung,LG,Diğer",
+                Date = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note = "TV Kategorisi",
+                UserId = 1,
+                ViewsCount = 100,
+                CommentCount = 1
+            },
+            new Product
+            {
+                Id = 2,
+                CategorId = 2,
+                Name = "Mobilya",
+                Content = "Birçok Mobilya markaları mevcuttur.",
+                Thumnail = "Default.jpg",
+                SeoDescription = "Mobilya",
+                SeoName = "YazHan",
+                SeoTags = "Modalife,Bellona,Diğer",
+                Date = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note = "Mobilya Kategorisi",
+                UserId = 1,
+                ViewsCount = 295,
+                CommentCount = 1
+            },
+            new Product
+            {
+                Id = 3,
+                CategorId = 3,
+                Name = "Saç & Bakım",
+                Content = "Birçok Saç & Bakım ürünleri mevcuttur.",
+                Thumnail = "Default.jpg",
+                SeoDescription = "Saç & Bakım",
+                SeoName = "YazHan",
+                SeoTags = "Diğer",
+                Date = DateTime.Now,
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note = "Saç & Bakım Kategorisi",
+                UserId = 1,
+                ViewsCount = 10,
+                CommentCount = 1
+            });
         }
     }
 }

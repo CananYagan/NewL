@@ -39,6 +39,25 @@ namespace NewL.Data.Concrete.EntityFramework.Mappings
             builder.Property(u => u.Note).HasMaxLength(500);
             builder.HasOne<Role>(u => u.Role).WithMany(r => r.Users).HasForeignKey(u => u.RoleId);
             builder.ToTable("Users");
+            builder.HasData(new User
+            {
+                Id = 1,
+                RoleId = 1,
+                UserName="YazHan",
+                FirstName = "Yazilim",
+                LastName = "Hanem",
+                Email = "yazilimhanem@gmail.com",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Description = "Ilk Admin Kullanıcısı",
+                Note = "Admin Kullanıcısı",
+                Picture= "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mobilhanem.com%2F&psig=AOvVaw1YnGpjhfi8N0iw84MjcDeF&ust=1670336486676000&source=images&cd=vfe&ved=0CBIQ3YkBahcKEwjg1a651uL7AhUAAAAAHQAAAAAQCQ",
+                PasswordHash = Encoding.ASCII.GetBytes("34529a2b935fdd0f8a616d63a4fa47bd")  //y****n2529
+            });
         }
     }
 }

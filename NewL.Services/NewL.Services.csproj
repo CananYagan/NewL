@@ -1,9 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NewL.Data\NewL.Data.csproj" />
+    <ProjectReference Include="..\NewL.Entities\NewL.Entities.csproj" />
+    <ProjectReference Include="..\NewL.Shared\NewL.Shared.csproj" />
+  </ItemGroup>
 
 </Project>

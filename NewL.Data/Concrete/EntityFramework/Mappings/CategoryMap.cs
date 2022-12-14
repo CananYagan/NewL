@@ -28,6 +28,48 @@ namespace NewL.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.IsDeleted).IsRequired();
             builder.Property(c => c.Note).HasMaxLength(500);
             builder.ToTable("Catagories");
+            builder.HasData(
+                new Category
+                {
+                    Id=1,
+                    Name="Elektronik",
+                    Description= "Elektrikli ve elektronik cihaz ve aletlerin tümüdür." +
+                    " Örneğin; Bulaşık makinesi, buzdolabı, elektrik süpürgesi, tost makinesi, telefonlar, bilgisayarlar vb…",
+                    IsActive=true, 
+                    IsDeleted=false,
+                    CreatedByName="InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName= "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note= "Elektronik Kategorisi"
+                },
+                new Category
+                {
+                    Id = 2,
+                    Name = "Ev & Yaşam",
+                    Description = "Ev & Yaşam dair eşyaların tümüdür.",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Ev & Yaşam Kategorisi"
+                },
+                new Category
+                {
+                    Id = 3,
+                    Name = "Kozmetik & Kişisel Bakım",
+                    Description = "Kozmetik & Kişisel Bakım dair eşyaların tümüdür.",
+                    IsActive = true,
+                    IsDeleted = false,
+                    CreatedByName = "InitialCreate",
+                    CreatedDate = DateTime.Now,
+                    ModifiedByName = "InitialCreate",
+                    ModifiedDate = DateTime.Now,
+                    Note = "Kozmetik & Kişisel Bakım Kategorisi"
+                });
+
 
         }
     }

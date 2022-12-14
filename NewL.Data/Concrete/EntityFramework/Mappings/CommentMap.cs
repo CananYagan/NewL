@@ -28,6 +28,47 @@ namespace NewL.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.Note).HasMaxLength(500);
             builder.HasOne<Product>(c => c.Product).WithMany(p => p.Comments).HasForeignKey(c => c.ProductId);
             builder.ToTable("Comments");
+            builder.HasData(
+            new Comment
+            {
+                Id=1,
+                ProductId=1,
+                Text="Ürün çok iyiydi.",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note = "Ürün çok iyiydi."
+            },
+            new Comment
+            {
+                Id = 2,
+                ProductId = 2,
+                Text = "Ürün eksik ve hatalıydı.",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note = "Ürün eksik ve hatalıydı."
+            },
+            new Comment
+            {
+                Id = 3,
+                ProductId = 3,
+                Text = "Ürün şık ve optimaldi.",
+                IsActive = true,
+                IsDeleted = false,
+                CreatedByName = "InitialCreate",
+                CreatedDate = DateTime.Now,
+                ModifiedByName = "InitialCreate",
+                ModifiedDate = DateTime.Now,
+                Note= "Ürün şık ve optimaldi."
+            }
+            );
 
         }
     }
