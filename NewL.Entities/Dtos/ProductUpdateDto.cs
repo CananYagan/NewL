@@ -17,7 +17,7 @@ namespace NewL.Entities.Dtos
         [Required(ErrorMessage = "{0} boş geçilmemelidir.")]
         [MaxLength(70, ErrorMessage = "{0} alanı {1} karakterden büyük olmamalıdır")]
         [MinLength(3, ErrorMessage = "{0} alanı {1} karakterden Küçük olmamalıdır")]
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         [DisplayName("İçerik")]
         [MaxLength(ErrorMessage = "{0} alanı {1} karakterden büyük olmamalıdır.")]

@@ -1,4 +1,6 @@
-﻿using NewL.Data.Abstract;
+﻿using AutoMapper;
+using NewL.Data.Abstract;
+using NewL.Entities.Concrete;
 using NewL.Entities.Dtos;
 using NewL.Services.Abstract;
 using NewL.Shared.Utilities.Results.Abstract;
@@ -15,20 +17,38 @@ namespace NewL.Services.Concrete
     public class ProductManager : IProductService
     {
         private readonly IUnitofWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public ProductManager(IUnitofWork unitOfWork)
+        public ProductManager(IUnitofWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public async Task<IResult> Add(ProductAddDto productDto, string createdByName)
+        public async Task<IResult> Add(ProductAddDto productAddDto, string createdByName)
         {
-            throw new NotImplementedException();
+            var product = _mapper.Map<Product>(productAddDto);
+            product.CreatedByName = createdByName;
+            product.ModifiedByName = createdByName;
+            product.UserId = 1;
+            await _unitOfWork.Products.AddAsync(product).ContinueWith(t => _unitOfWork.SaveAsync());
+            return new Result(ResultStatus.Success,$"{productAddDto.Name} ürün başarıyla eklenmiştir");
+
         }
 
-        public Task<IResult> Delete(int productId, string modifiedByName)
+        public async Task<IResult> Delete(int productId, string modifiedByName)
         {
-            throw new NotImplementedException();
+            var result= await _unitOfWork.Products.AnyAsync(p=>p.Id==productId);
+            if (result)
+            {
+                var product = await _unitOfWork.Products.GetAsync(p => p.Id == productId);
+                product.IsDeleted=true;
+                product.ModifiedByName = modifiedByName;
+                product.ModifiedDate=DateTime.Now;
+                await _unitOfWork.Products.UpdateAsync(product).ContinueWith(t => _unitOfWork.SaveAsync());
+                return new Result(ResultStatus.Success,$"{product.Name} ürünü silinmiştir");
+            }
+            return new Result(ResultStatus.Error, "Böyle bir ürün bulunamadı");
         }
 
         public async Task<IDataResult<ProductDto>> Get(int productId)
@@ -42,7 +62,7 @@ namespace NewL.Services.Concrete
                     ResultStatus = ResultStatus.Success
                 });
             }
-            return new DataResult<ProductDto>(ResultStatus.Error, "Böyle bir makale bulunamadı", null);
+            return new DataResult<ProductDto>(ResultStatus.Error, "Böyle bir ürün bulunamadı", null);
         }
 
         public async Task<IDataResult<ProductListDto>> GetAll()
@@ -103,14 +123,24 @@ namespace NewL.Services.Concrete
             return new DataResult<ProductListDto>(ResultStatus.Error, "Ürünler bulunamadı", null);
         }
 
-        public Task<IResult> HardDelete(int productId)
+        public async Task<IResult> HardDelete(int productId)
         {
-            throw new NotImplementedException();
+            var result = await _unitOfWork.Products.AnyAsync(p => p.Id == productId);
+            if (result)
+            {
+                var product = await _unitOfWork.Products.GetAsync(p => p.Id == productId);
+                await _unitOfWork.Products.DeleteAsync(product).ContinueWith(t => _unitOfWork.SaveAsync());
+                return new Result(ResultStatus.Success, $"{product.Name} ürünü veritabanından silinmiştir");
+            }
+            return new Result(ResultStatus.Error, "Böyle bir ürün bulunamadı");
         }
 
-        public Task<IResult> Update(ProductUpdateDto productUpdateDto, string modifiedByName)
+        public async Task<IResult> Update(ProductUpdateDto productUpdateDto, string modifiedByName)
         {
-            throw new NotImplementedException();
+            var product=_mapper.Map<Product>(productUpdateDto);
+            product.ModifiedByName = modifiedByName;
+            await _unitOfWork.Products.UpdateAsync(product).ContinueWith(t=>_unitOfWork.SaveAsync());
+            return new Result(ResultStatus.Success,$"{productUpdateDto.Name} ürün başarıyla güncellenmiştir.");
         }
     }
 }

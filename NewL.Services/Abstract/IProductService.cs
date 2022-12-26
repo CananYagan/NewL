@@ -16,7 +16,7 @@ namespace NewL.Services.Abstract
         Task<IDataResult<ProductListDto>> GetAllByNonDeleted();
         Task<IDataResult<ProductListDto>> GetAllByNonDeletedAndActive();
         Task<IDataResult<ProductListDto>> GetAllByCategory(int categoryId);
-        Task<IResult> Add(ProductAddDto productDto, string createdByName);
+        Task<IResult> Add(ProductAddDto productAddDto, string createdByName);
         Task<IResult> Update(ProductUpdateDto productUpdateDto, string modifiedByName);
         Task<IResult> Delete(int productId, string modifiedByName);
         Task<IResult> HardDelete(int productId);

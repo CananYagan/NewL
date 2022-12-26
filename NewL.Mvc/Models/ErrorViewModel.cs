@@ -1,4 +1,4 @@
-namespace NewL.Mvc.Models
+namespace NewL.MVC.Models
 {
     public class ErrorViewModel
     {
